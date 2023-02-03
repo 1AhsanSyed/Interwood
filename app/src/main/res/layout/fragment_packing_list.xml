@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/_20dp"
+    android:paddingTop="@dimen/_10dp"
+    android:paddingEnd="@dimen/_20dp"
+    android:weightSum="3"
+    tools:context=".ui.fragments.packinglist.PackingList.PackingListFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/textColorPrimaryRegularMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5dp"
+            android:layout_marginBottom="@dimen/_5dp"
+            android:text="Scan Packet:" />
+
+        <TextView
+            android:id="@+id/scanPacket"
+            style="@style/textBlackLightMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/app_text_view_background"
+            android:hint="SP-54584"
+            android:padding="@dimen/_10dp" />
+
+        <TextView
+            style="@style/textColorPrimaryRegularMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginBottom="@dimen/_5dp"
+            android:text="Job no:" />
+
+        <TextView
+            android:id="@+id/JobNo"
+            style="@style/textBlackLightMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/app_text_view_background"
+            android:hint="1558845"
+            android:padding="@dimen/_10dp" />
+
+
+        <TextView
+            style="@style/textColorPrimaryRegularMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginBottom="@dimen/_5dp"
+            android:text="Item:" />
+
+        <TextView
+            android:id="@+id/item"
+            style="@style/textBlackLightMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/app_text_view_background"
+            android:hint="Job no"
+            android:padding="@dimen/_10dp" />
+
+
+        <TextView
+            style="@style/textColorPrimaryRegularMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginBottom="@dimen/_5dp"
+            android:text="packing Code:" />
+
+        <TextView
+            android:id="@+id/packingCode"
+            style="@style/textBlackLightMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/app_text_view_background"
+            android:hint="0000354"
+            android:padding="@dimen/_10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="0.9">
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/composeView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_5dp"
+            android:background="@color/colorAccent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="@dimen/_5dp"
+            android:background="@android:color/transparent"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_background">
+
+                <TextView
+                    style="@style/textMediumWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Generate Pass" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

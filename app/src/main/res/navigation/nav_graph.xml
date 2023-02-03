@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/packingListFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.autobar.interwood.ui.fragments.walkThrough.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.autobar.interwood.ui.fragments.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.autobar.interwood.ui.fragments.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/packingListFragment"
+        android:name="com.autobar.interwood.ui.fragments.packinglist.PackingList.PackingListFragment"
+        android:label="fragment_packing_list"
+        tools:layout="@layout/fragment_packing_list" />
+</navigation>
