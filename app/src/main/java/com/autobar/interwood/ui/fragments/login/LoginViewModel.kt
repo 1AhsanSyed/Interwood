@@ -23,12 +23,12 @@ class LoginViewModel @Inject constructor(
     val loginResponse: LiveData<Resource<UserLogin>>
         get() = _loginResponse
 
-    fun userLogin(param : JsonObject) {
+    fun userLogin(param: JsonObject) {
         viewModelScope.launch {
             _loginResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.userLogin(param) .let {
+                    mainRepository.userLogin(param).let {
                         if (it.isSuccessful) {
                             _loginResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {

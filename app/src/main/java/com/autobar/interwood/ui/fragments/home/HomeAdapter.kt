@@ -8,16 +8,17 @@ import com.autobar.interwood.data.models.Home
 import com.autobar.interwood.databinding.ItemHomeBinding
 import com.autobar.interwood.ui.callbacks.OnItemClickListener
 
-class HomeAdapter(var arrayList: ArrayList<Home>, var onItemClickListener: OnItemClickListener) : Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter(var arrayList: ArrayList<Home>, var onItemClickListener: OnItemClickListener) :
+    Adapter<HomeAdapter.HomeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val itemHomeBinding = ItemHomeBinding.inflate(inflater,parent,false)
+        val itemHomeBinding = ItemHomeBinding.inflate(inflater, parent, false)
         return HomeViewHolder(itemHomeBinding)
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        val home : Home =arrayList.get(position)
+        val home: Home = arrayList.get(position)
         holder.binding.icon.setImageResource(home.thumbNail)
         holder.binding.title.text = home.title
 
@@ -31,8 +32,7 @@ class HomeAdapter(var arrayList: ArrayList<Home>, var onItemClickListener: OnIte
     }
 
 
-
-    class HomeViewHolder(itemHomeBinding : ItemHomeBinding) : ViewHolder(itemHomeBinding.root){
+    class HomeViewHolder(itemHomeBinding: ItemHomeBinding) : ViewHolder(itemHomeBinding.root) {
 
         val binding = itemHomeBinding
     }

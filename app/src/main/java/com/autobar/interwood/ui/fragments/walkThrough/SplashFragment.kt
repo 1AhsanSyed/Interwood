@@ -17,7 +17,7 @@ import com.autobar.interwood.ui.MainActivity
 
 class SplashFragment : Fragment() {
 
-    lateinit var binding : FragmentSplashBinding
+    lateinit var binding: FragmentSplashBinding
     var navController: NavController? = null
 
     override fun onCreateView(
@@ -26,7 +26,7 @@ class SplashFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        binding = FragmentSplashBinding.inflate(layoutInflater,container,false)
+        binding = FragmentSplashBinding.inflate(layoutInflater, container, false)
 
         (activity as MainActivity?)!!.hideHeader()
 
@@ -36,8 +36,8 @@ class SplashFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             // Your Code
 
-           /* if (userToken.isNotEmpty()) {
-              *//*  val intent = Intent(requireContext(), MainActivity::class.java)
+            /* if (userToken.isNotEmpty()) {
+               *//*  val intent = Intent(requireContext(), MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)*//*
             } else {

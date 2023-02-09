@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/packingListFragment"
-        android:name="com.autobar.interwood.ui.fragments.packinglist.PackingList.PackingListFragment"
+        android:name="com.autobar.interwood.ui.fragments.packinglist.PackingList.QCFragment"
         android:label="fragment_packing_list"
-        tools:layout="@layout/fragment_packing_list" />
+        tools:layout="@layout/fragment_q_c" />
 </navigation>

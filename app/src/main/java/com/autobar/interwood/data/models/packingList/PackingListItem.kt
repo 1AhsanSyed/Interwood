@@ -1,0 +1,36 @@
+package com.autobar.interwood.data.models.packingList
+
+data class PackingListItem(
+    var compCode:  String?,
+    var compQty: Int?,
+    var customer:  String?,
+    var direction:  String?,
+    var docEntryDate:  String?,
+    var docEntryNo:  String?,
+    var fgItemCode:  String?,
+    var fgItemName:  String?,
+    var height:  String?,
+    var jobNo:  String?,
+    var jobQty:  String?,
+    var length:  String?,
+    var packNo:  Int?,
+    var packet:  String?,
+    var packingCode:  Int?,
+    var packingDetailCode:  Int?,
+    var printBy:  String?,
+    var printDate:  String?,
+    var printNo:  Int?,
+    var remarks:  String?,
+    var row_num:  Int?,
+    var sItemCode:  String?,
+    var sItemName:  String?,
+    var salesOrder:  String?,
+    var status: Boolean,
+    var transDate:  String?,
+    var type:  String?,
+    var unit:  String?,
+    var updDate:  String?,
+    var width:  String?,
+    var isSelected : Boolean = false
+
+)

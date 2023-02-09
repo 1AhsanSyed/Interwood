@@ -7,5 +7,5 @@ data class PackingList(
     val sno : Int,
     val item : String,
     val packet : Int,
-    var isSelected : MutableState<Boolean> = mutableStateOf(false)
+    var isSelected : Boolean = false
 )

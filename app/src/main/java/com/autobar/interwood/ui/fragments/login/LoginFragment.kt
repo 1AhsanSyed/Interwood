@@ -6,15 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.autobar.interwood.R
 import com.autobar.interwood.databinding.FragmentLoginBinding
 import com.autobar.interwood.ui.MainActivity
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.ingenious.powergenerations.data.remote.Resource
 import com.ingenious.powergenerations.utils.DialogHelperClass
@@ -39,9 +39,8 @@ class LoginFragment : Fragment() {
 
         loginBinding = FragmentLoginBinding.inflate(layoutInflater, container, false)
 
-        val loginViewModel : LoginViewModel by viewModels()
+        val loginViewModel: LoginViewModel by viewModels()
 //        val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-
 
 
         (activity as MainActivity?)!!.hideHeader()
@@ -61,7 +60,6 @@ class LoginFragment : Fragment() {
 
                 loginViewModel.userLogin(loginParams)
             }
-
 
 
         }
@@ -84,8 +82,12 @@ class LoginFragment : Fragment() {
                     loadingDialog.dismiss()
                     it.data?.let {
                         it.let {
+                            val bundle = Bundle()
+                            val gson = Gson()
+                            val loginResult = gson.toJson(it.data)
+                            bundle.putString("loginResult", loginResult)
                             requireContext().showToast(it.message)
-                            findNavController().navigate(R.id.homeFragment)
+                            findNavController().navigate(R.id.homeFragment, bundle)
 
                         }
                     }

@@ -8,14 +8,9 @@ object AppConstants {
     @StringDef(ApiConfiguration.BASE_URL)
     annotation class ApiConfiguration {
         companion object {
-            //            const val BASE_URL = "http://110.39.7.210:704/api/"
-//            const val BASE_URL = "http://192.168.6.11:901/api/"
-//            const val BASE_URL = "http://192.168.100.18:8082/api/"
-//            const val BASE_URL = "http://escloud.dyndns.info:709/api/"
-//            const val BASE_URL = "http://192.168.2.100:922/api/"
-//            const val BASE_URL = "http://192.168.2.100:922/api/"
-//            const val BASE_URL = "http://192.168.6.11:905/api/"
-            const val BASE_URL = "http://192.168.100.58:708/api/"
+//            const val BASE_URL = "http://escloud.dyndns.info:706/"
+//
+            const val BASE_URL = "http://192.168.100.59:708/"
         }
     }
 

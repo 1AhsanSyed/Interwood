@@ -12,7 +12,7 @@
     <RelativeLayout
         android:id="@+id/app_header"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:elevation="@dimen/_4dp"
         android:orientation="horizontal"
         android:paddingStart="@dimen/_10dp"
