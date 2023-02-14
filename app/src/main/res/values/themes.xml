@@ -41,13 +41,6 @@
     </style>
 
 
-    <style name="textColorPrimaryLightLarge" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/poppins_light</item>
-        <item name="android:textSize">18sp</item>
-
-    </style>
-
     <style name="textColorPrimaryLightMedium" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:fontFamily">@font/poppins_light</item>
@@ -55,13 +48,6 @@
 
     </style>
 
-
-    <style name="textColorPrimaryLightSmall" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/poppins_light</item>
-        <item name="android:textSize">12sp</item>
-
-    </style>
 
     <style name="textBlackLightMedium" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/black</item>
@@ -93,55 +79,12 @@
     </style>
 
 
-
-    <style name="textColorPrimaryRegularLarge" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/poppins</item>
-        <item name="android:textSize">18sp</item>
-
-    </style>
-
-
     <style name="textColorPrimaryRegularMedium" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textSize">14sp</item>
 
     </style>
-
-    <style name="textColorPrimaryRegularSmall" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/poppins</item>
-        <item name="android:textSize">12sp</item>
-
-    </style>
-
-
-    <style name="textColorPrimaryMediumLarge" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/poppins_medium</item>
-        <item name="android:textSize">18sp</item>
-
-    </style>
-
-
-    <style name="textColorPrimaryMediumMedium" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/poppins_medium</item>
-        <item name="android:textSize">14sp</item>
-
-    </style>
-
-    <style name="textColorPrimaryMediumSmall" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/poppins_medium</item>
-        <item name="android:textSize">12sp</item>
-
-    </style>
-
-
-
-
 
 
 </resources>

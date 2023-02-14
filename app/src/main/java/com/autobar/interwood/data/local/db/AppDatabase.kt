@@ -6,19 +6,22 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.autobar.interwood.data.local.db.mechanical.ReceiveGoodsDao
+import com.autobar.interwood.data.models.receiveGoods.Data
 import com.ingenious.powergenerations.constants.AppConstants
 import com.ingenious.powergenerations.data.models.exhaustTemp.ExhaustTemp
 
 
 @Database(
-    entities = [ExhaustTemp::class],
-    version = 5,
+    entities = [ExhaustTemp::class, Data::class],
+    version = 1,
     exportSchema = false
 )
 
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun appDao(): AppDao
+    abstract fun receiveDao(): ReceiveGoodsDao
 
     companion object {
 

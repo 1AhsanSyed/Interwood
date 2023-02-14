@@ -59,7 +59,6 @@
             android:background="@color/colorAccent"/>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/btnLogout"
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"

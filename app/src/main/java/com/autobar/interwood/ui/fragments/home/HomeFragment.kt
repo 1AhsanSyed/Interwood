@@ -14,10 +14,7 @@ import com.autobar.interwood.data.models.login.Data
 import com.autobar.interwood.databinding.FragmentHomeBinding
 import com.autobar.interwood.ui.MainActivity
 import com.autobar.interwood.ui.callbacks.OnItemClickListener
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.ingenious.powergenerations.utils.showToast
-import timber.log.Timber
 
 
 class HomeFragment : Fragment(), OnItemClickListener {
@@ -89,11 +86,12 @@ class HomeFragment : Fragment(), OnItemClickListener {
             }
 
            2 -> {
-                if (list.get(position).hasRight.equals(1)){
-                    findNavController().navigate(R.id.packingListFragment)
+               findNavController().navigate(R.id.recevingGoodsFragment)
+
+           /*    if (list.get(position).hasRight.equals(1)){
                 }else{
                     requireActivity().showToast("restricted")
-                }
+                }*/
             }
 
             4 -> {

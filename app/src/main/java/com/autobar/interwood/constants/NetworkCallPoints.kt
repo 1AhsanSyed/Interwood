@@ -8,5 +8,6 @@ class NetworkCallPoints {
         const val USER_LOGIN = "api/UserLogin_API"
         const val Packing_Request = "api/GetPacketLabelbyQR"
         const val Update_QC_List = "api/QC_PacketLabelbyQR"
+        const val GET_JOB_DETAILS = "api/Get_PacketDetailbyJobNo"
     }
 }

@@ -5,6 +5,7 @@ import com.autobar.interwood.data.models.login.UserLogin
 import com.autobar.interwood.data.models.packingList.PackingList
 import com.autobar.interwood.data.models.packingList.UpdateQC
 import com.autobar.interwood.data.models.packingList.UpdateQCResult
+import com.autobar.interwood.data.models.receiveGoods.ReceivedGoods
 import com.google.gson.JsonObject
 import com.ingenious.powergenerations.constants.NetworkCallPoints
 import com.ingenious.powergenerations.data.models.ProductModel
@@ -25,6 +26,9 @@ interface ApiService {
 
     @POST(NetworkCallPoints.Update_QC_List)
     suspend fun updateQCList(@Body packingDetails : UpdateQC) : Response<UpdateQCResult>
+
+    @POST(NetworkCallPoints.GET_JOB_DETAILS)
+    suspend fun getJobDetails(@Body jobNo : JsonObject) : Response<ReceivedGoods>
 
 
 

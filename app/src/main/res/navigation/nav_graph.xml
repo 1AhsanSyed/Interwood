@@ -2,8 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/packingListFragment">
+    app:startDestination="@id/recevingGoodsFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -25,4 +24,9 @@
         android:name="com.autobar.interwood.ui.fragments.packinglist.PackingList.QCFragment"
         android:label="fragment_packing_list"
         tools:layout="@layout/fragment_q_c" />
+    <fragment
+        android:id="@+id/recevingGoodsFragment"
+        android:name="com.autobar.interwood.ui.fragments.receiving.RecevingGoodsFragment"
+        android:label="fragment_receving_goods"
+        tools:layout="@layout/fragment_receving_goods" />
 </navigation>

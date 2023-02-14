@@ -10,7 +10,7 @@ object AppConstants {
         companion object {
 //            const val BASE_URL = "http://escloud.dyndns.info:706/"
 //
-            const val BASE_URL = "http://192.168.100.59:708/"
+            const val BASE_URL = "http://192.168.100.45:708/"
         }
     }
 

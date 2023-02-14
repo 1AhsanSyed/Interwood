@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ui.fragments.receiving.RecevingGoodsFragment">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/jobNo"
+        android:layout_margin="@dimen/_10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/colorAccent"
+        app:placeholderTextColor="@color/colorPrimary"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:boxStrokeWidth="@dimen/_2dp"
+        app:startIconContentDescription="username"
+        app:boxCornerRadiusBottomEnd="@dimen/_10dp"
+        app:boxCornerRadiusBottomStart="@dimen/_10dp"
+        app:boxCornerRadiusTopEnd="@dimen/_10dp"
+        app:boxCornerRadiusTopStart="@dimen/_10dp"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/icon_username"
+        app:endIconTint="@color/colorPrimary"
+        android:layout_marginBottom="@dimen/_30dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_10dp"
+            android:hint="Enter Job No"
+            android:textColorHint="@color/colorAccent"
+            android:autofillHints=""
+            android:imeOptions="actionSearch"
+            android:inputType="textEmailAddress"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <androidx.compose.ui.platform.ComposeView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/composeView"/>
+
+
+
+
+</LinearLayout>

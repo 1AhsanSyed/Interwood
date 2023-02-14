@@ -17,6 +17,7 @@ class MainRepository @Inject constructor(
     suspend fun getPackingDetails(@Body param : JsonObject) = apiService.getPackingDetails(param)
 
     suspend fun updateQCList(@Body param : UpdateQC) = apiService.updateQCList(param)
+    suspend fun getJobDetails(@Body param : JsonObject) = apiService.getJobDetails(param)
 
 
 }
