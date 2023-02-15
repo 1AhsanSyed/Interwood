@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.autobar.interwood.data.local.db.mechanical.ReceiveGoodsDao
+import com.autobar.interwood.data.local.db.ReceiveGoodsDao
 import com.autobar.interwood.data.models.receiveGoods.Data
 import com.ingenious.powergenerations.constants.AppConstants
 import com.ingenious.powergenerations.data.models.exhaustTemp.ExhaustTemp

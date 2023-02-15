@@ -37,7 +37,7 @@
             android:textColorHint="@color/colorAccent"
             android:autofillHints=""
             android:imeOptions="actionSearch"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>

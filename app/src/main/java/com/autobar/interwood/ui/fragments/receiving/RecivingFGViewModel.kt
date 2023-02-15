@@ -4,20 +4,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.autobar.interwood.data.models.packingList.PackingList
+import com.autobar.interwood.data.models.receiveGoods.Data
 import com.autobar.interwood.data.models.receiveGoods.ReceivedGoods
 import com.google.gson.JsonObject
 import com.ingenious.powergenerations.baseclasses.BaseViewModel
+import com.ingenious.powergenerations.data.local.db.AppDatabase
 import com.ingenious.powergenerations.data.remote.Resource
 import com.ingenious.powergenerations.data.remote.reporitory.MainRepository
 import com.ingenious.powergenerations.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RecivingFGViewModel @Inject constructor(
     private val mainRepository: MainRepository,
-    private val networkHelper: NetworkHelper
+    private val networkHelper: NetworkHelper,
+    private val appDatabase : AppDatabase
 )  : BaseViewModel(){
 
 
@@ -25,7 +30,7 @@ class RecivingFGViewModel @Inject constructor(
     val jobDetailResponse: LiveData<Resource<ReceivedGoods>>
         get() = _jobDetailResponse
 
-     fun getJobDetails(jobNo : JsonObject){
+     fun getJobDetails(jobNo : Int){
 
         viewModelScope.launch {
             _jobDetailResponse.postValue( Resource.loading(null))
@@ -52,6 +57,38 @@ class RecivingFGViewModel @Inject constructor(
 
         }
 
+    }
+
+
+    private val _isDataPresent = MutableLiveData<Int>()
+    val isDataPresent: LiveData<Int>
+        get() = _isDataPresent
+    fun isDataPresent (){
+        viewModelScope.launch(Dispatchers.IO) {
+            _isDataPresent.postValue(appDatabase.receiveDao().isDataPresent())
+        }
+    }
+
+    private val _isAlreadyScanned = MutableLiveData<Boolean>()
+    val isAlreadyScanned: LiveData<Boolean>
+        get() = _isAlreadyScanned
+
+    fun isAlreadyScanned (packNo : Int, fgCode : String, packingCode : String){
+        viewModelScope.launch(Dispatchers.IO) {
+            _isAlreadyScanned.postValue(appDatabase.receiveDao().checkIsScanned(packNo,fgCode,packingCode))
+        }
+    }
+
+
+    private val _receiveData = MutableLiveData<Int>()
+    val receiveData: LiveData<Int>
+        get() = _receiveData
+
+    fun updateScannedList(packNo : Int, fgCode : String, packingCode : String) {
+
+        viewModelScope.launch(Dispatchers.IO) {
+            _receiveData.postValue(appDatabase.receiveDao().updateScannedItem(packNo,fgCode,packingCode))
+        }
     }
 
 }

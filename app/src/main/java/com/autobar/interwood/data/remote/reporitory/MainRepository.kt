@@ -5,6 +5,8 @@ import com.google.gson.JsonObject
 import com.ingenious.powergenerations.data.local.db.AppDao
 import com.ingenious.powergenerations.data.remote.ApiService
 import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
@@ -17,7 +19,8 @@ class MainRepository @Inject constructor(
     suspend fun getPackingDetails(@Body param : JsonObject) = apiService.getPackingDetails(param)
 
     suspend fun updateQCList(@Body param : UpdateQC) = apiService.updateQCList(param)
-    suspend fun getJobDetails(@Body param : JsonObject) = apiService.getJobDetails(param)
+    @FormUrlEncoded
+    suspend fun getJobDetails(@Field("JobNo") JobNo : Int) = apiService.getJobDetails(JobNo)
 
 
 }

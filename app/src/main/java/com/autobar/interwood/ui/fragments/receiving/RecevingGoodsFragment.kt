@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -21,10 +23,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.autobar.interwood.R
+import com.autobar.interwood.data.models.packingList.PackingListItem
+import com.autobar.interwood.data.models.receiveGoods.Data
 import com.autobar.interwood.databinding.FragmentRecevingGoodsBinding
-import com.autobar.interwood.ui.customComponent.HeadingTextView
-import com.autobar.interwood.ui.customComponent.ItemTextView
-import com.google.gson.JsonObject
+import com.autobar.interwood.ui.customComponent.customTextView
 import com.ingenious.powergenerations.data.local.db.AppDatabase
 import com.ingenious.powergenerations.data.remote.Resource
 import com.ingenious.powergenerations.utils.DialogHelperClass
@@ -40,6 +42,7 @@ class RecevingGoodsFragment : Fragment() {
 
     lateinit var binding: FragmentRecevingGoodsBinding
     protected lateinit var loadingDialog: Dialog
+    var receivingList = ArrayList<Data>()
 
 
     override fun onCreateView(
@@ -49,27 +52,67 @@ class RecevingGoodsFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentRecevingGoodsBinding.inflate(layoutInflater, container, false)
 
-        val recivingFGViewModel : RecivingFGViewModel by viewModels()
+        val recivingFGViewModel: RecivingFGViewModel by viewModels()
 
         loadingDialog = DialogHelperClass.loadingDialog(requireContext())
 
-        binding.jobNo.editText?.setOnKeyListener(object : View.OnKeyListener{
+        binding.jobNo.editText?.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(p0: View?, keyCode: Int, event: KeyEvent?): Boolean {
-                if (event!!.action== KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER ){
+                if (event!!.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
 
-                    val SplitString: Array<String> = binding.jobNo.editText?.text.toString().split("*").toTypedArray()
+                    val SplitString: Array<String> =
+                        binding.jobNo.editText?.text.toString().split("*").toTypedArray()
                     val jobNo = SplitString[0]
-
-//                    binding.scanQRCode.text.clear()
-
+                    val packingCode = SplitString[1]
+                    val fGCode = SplitString[2]
+                    val packetNo = SplitString[3]
+                    val saleOrderNO = SplitString[4]
 
                     if (isValidate()) {
 
-                        val qrCodeParams = JsonObject()
 
-                        qrCodeParams.addProperty("JobNo", jobNo)
+                        //check if database is not empty/null
+                        recivingFGViewModel.isDataPresent()
+                        recivingFGViewModel.isDataPresent.observe(requireActivity(), Observer {
+                            if (it > 0) {
 
-                        recivingFGViewModel.getJobDetails(qrCodeParams)
+                                //if data present then, check is packet scanned or not
+                                recivingFGViewModel.isAlreadyScanned(
+                                    packetNo.toInt(),
+                                    fGCode,
+                                    packingCode
+                                )
+                                recivingFGViewModel.isAlreadyScanned.observe(
+                                    requireActivity(),
+                                    Observer {
+                                        if (!it) {
+
+                                            recivingFGViewModel.updateScannedList(
+                                                packetNo.toInt(),
+                                                fGCode,
+                                                packingCode
+                                            )
+                                            recivingFGViewModel.receiveData.observe(requireActivity(),
+                                                Observer {
+                                                    if (it > 0) {
+                                                        requireActivity().showToast("Updated")
+                                                    } else {
+                                                        requireActivity().showToast("Not updated")
+                                                    }
+                                                })
+
+
+                                        }
+                                        else {
+                                            requireActivity().showToast("Already Scanned")
+                                        }
+                                    })
+
+                            } else {
+                                recivingFGViewModel.getJobDetails(jobNo.toInt())
+                            }
+                        })
+
                     }
 
                     return true
@@ -108,24 +151,20 @@ class RecevingGoodsFragment : Fragment() {
                     loadingDialog.dismiss()
                     it.data?.let {
                         it.let {
-
-                            requireActivity().showToast("Details against job no stored")
-
+//                            requireActivity().showToast("Details against job no stored")
 //                            val list = mutableStateListOf<com.autobar.interwood.data.models.packingList.PackingList>(
 //                                it
 //                            )
-
-/*
-                            lifecycleScope.launch(Dispatchers.IO){
+                            lifecycleScope.launch(Dispatchers.IO) {
                                 async {
-                                    AppDatabase.getDatabase(requireContext()).receiveDao().storeJobData(it.data)
+                                    AppDatabase.getDatabase(requireContext()).receiveDao()
+                                        .storeJobData(it.data)
                                 }.await()
 
-                                Dispatchers.Main{
+                                Dispatchers.Main {
                                     requireActivity().showToast("Details against job no stored")
                                 }
                             }
-*/
 
                         }
                     }
@@ -136,7 +175,7 @@ class RecevingGoodsFragment : Fragment() {
                 }
             }
         })
-        
+
     }
 
     private fun isValidate(): Boolean {
@@ -165,13 +204,12 @@ class RecevingGoodsFragment : Fragment() {
 
             RecyclerHeader()
 
-            LazyColumn(Modifier.padding(0.dp, 10.dp)) {
-                items(20) { index ->
+            /* LazyColumn(Modifier.padding(0.dp, 5.dp)) {
+                 val receiveList = remember {
+                     mutableStateOf<List<Data>>(receivingList)
+                 }
 
-                    ItemView()
-                }
-
-            }
+             }*/
         }
 
     }
@@ -184,49 +222,54 @@ class RecevingGoodsFragment : Fragment() {
                 .background(color = colorResource(id = R.color.white)),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            HeadingTextView(
+            customTextView(
                 modifier = Modifier
                     .weight(0.25f)
                     .align(Alignment.CenterVertically),
                 text = "Sno",
                 color = R.color.colorPrimary,
-                font = R.font.poppins_medium
+                font = R.font.poppins_medium,
+                24
             )
 
-            HeadingTextView(
+            customTextView(
                 modifier = Modifier
                     .weight(0.5f)
                     .align(Alignment.CenterVertically),
                 text = "JOB NO",
                 color = R.color.colorPrimary,
-                font = R.font.poppins_medium
+                font = R.font.poppins_medium,
+                24
             )
 
-            HeadingTextView(
+            customTextView(
                 modifier = Modifier
                     .weight(0.5f)
                     .align(Alignment.CenterVertically),
                 text = "FG NO",
                 color = R.color.colorPrimary,
-                font = R.font.poppins_medium
+                font = R.font.poppins_medium,
+                24
             )
 
-            HeadingTextView(
+            customTextView(
                 modifier = Modifier
                     .weight(0.5f)
                     .align(Alignment.CenterVertically),
                 text = "PACKET NO",
                 color = R.color.colorPrimary,
-                font = R.font.poppins_medium
+                font = R.font.poppins_medium,
+                24
             )
 
-            HeadingTextView(
+            customTextView(
                 modifier = Modifier
                     .weight(0.5f)
                     .align(Alignment.CenterVertically),
                 text = "Scanned",
                 color = R.color.colorPrimary,
-                font = R.font.poppins_medium
+                font = R.font.poppins_medium,
+                24
             )
 
         }
@@ -234,56 +277,62 @@ class RecevingGoodsFragment : Fragment() {
 
 
     @Composable
-    fun ItemView() {
+    fun ItemView(sNO: Int) {
         Row(
             modifier = Modifier
                 .wrapContentHeight()
                 .background(color = colorResource(id = R.color.white)),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            ItemTextView(
+            val sn = sNO + 1
+            customTextView(
                 modifier = Modifier
                     .weight(0.25f)
                     .align(Alignment.CenterVertically),
-                text = "Sno",
+                text = "$sn",
                 color = R.color.black,
-                font = R.font.poppins_medium
+                font = R.font.poppins_light,
+                18
             )
 
-            HeadingTextView(
+            customTextView(
                 modifier = Modifier
                     .weight(0.5f)
                     .align(Alignment.CenterVertically),
                 text = "JOB NO",
-                color = R.color.colorPrimary,
-                font = R.font.poppins_medium
+                color = R.color.black,
+                font = R.font.poppins_light,
+                18
             )
 
-            HeadingTextView(
+            customTextView(
                 modifier = Modifier
                     .weight(0.5f)
                     .align(Alignment.CenterVertically),
                 text = "FG NO",
-                color = R.color.colorPrimary,
-                font = R.font.poppins_medium
+                color = R.color.black,
+                font = R.font.poppins_light,
+                18
             )
 
-            HeadingTextView(
+            customTextView(
                 modifier = Modifier
                     .weight(0.5f)
                     .align(Alignment.CenterVertically),
                 text = "PACKET NO",
-                color = R.color.colorPrimary,
-                font = R.font.poppins_medium
+                color = R.color.black,
+                font = R.font.poppins_light,
+                18
             )
 
-            HeadingTextView(
+            customTextView(
                 modifier = Modifier
                     .weight(0.5f)
                     .align(Alignment.CenterVertically),
                 text = "Scanned",
-                color = R.color.colorPrimary,
-                font = R.font.poppins_medium
+                color = R.color.black,
+                font = R.font.poppins_light,
+                18
             )
 
         }
